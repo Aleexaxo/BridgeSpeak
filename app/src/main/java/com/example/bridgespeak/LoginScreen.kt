@@ -1,11 +1,13 @@
 package com.example.bridgespeak
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -13,8 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun SignUpScreen(navController: NavController) {
-    var username by remember { mutableStateOf("") }
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -29,23 +30,22 @@ fun SignUpScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Logo (optional)
+            Image(
+                painter = painterResource(id = R.drawable.logo), // replace with your logo file
+                contentDescription = "App Logo",
+                modifier = Modifier.size(150.dp)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             Text(
-                text = "Create Account",
+                text = "Welcome!",
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(24.dp))
-
-            OutlinedTextField(
-                value = username,
-                onValueChange = { username = it },
-                label = { Text("Username") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
                 value = email,
@@ -71,20 +71,20 @@ fun SignUpScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    // TODO: Save user data or integrate with Firebase
-                    navController.navigate("login")
+                    // TODO: Add real authentication logic here
+                    navController.navigate("camera")
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Sign Up")
+                Text("Login")
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             TextButton(onClick = {
-                navController.popBackStack()
+                navController.navigate("signup")
             }) {
-                Text("Already have an account? Log In")
+                Text("Don't have an account? Sign Up")
             }
         }
     }
