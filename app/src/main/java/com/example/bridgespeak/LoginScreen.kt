@@ -79,6 +79,11 @@ fun LoginScreen(navController: NavController) {
                 Text("Login")
             }
 
+            navController.navigate("home") {
+                popUpTo("login") { inclusive = true }
+            }
+
+
             Spacer(modifier = Modifier.height(16.dp))
 
             TextButton(onClick = {
