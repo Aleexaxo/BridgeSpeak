@@ -1,6 +1,5 @@
 package com.example.bridgespeak
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -70,13 +69,15 @@ fun HomeScreen(navController: NavController, userName: String = "Candesse") {
                         title = "Image Translation",
                         description = "Upload or capture photos of hand signs.",
                         icon = R.drawable.ic_image,
-                        onClick = { navController.navigate("image_translation") }
+                        onClick = { navController.navigate("image_translation") },
+                        modifier = Modifier.weight(1f)
                     )
                     HomeOptionCard(
                         title = "Profile",
                         description = "Edit your personal information.",
                         icon = R.drawable.ic_profile,
-                        onClick = { navController.navigate("profile") }
+                        onClick = { navController.navigate("profile") },
+                        modifier = Modifier.weight(1f)
                     )
                 }
 
@@ -88,13 +89,15 @@ fun HomeScreen(navController: NavController, userName: String = "Candesse") {
                         title = "History",
                         description = "View saved translations.",
                         icon = R.drawable.ic_history,
-                        onClick = { navController.navigate("history") }
+                        onClick = { navController.navigate("history") },
+                        modifier = Modifier.weight(1f)
                     )
                     HomeOptionCard(
                         title = "Help and About",
                         description = "Learn how to use BridgeSpeak.",
                         icon = R.drawable.ic_help,
-                        onClick = { navController.navigate("help") }
+                        onClick = { navController.navigate("help") },
+                        modifier = Modifier.weight(1f)
                     )
                 }
             }
@@ -107,31 +110,46 @@ fun HomeOptionCard(
     title: String,
     description: String,
     icon: Int,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
+            .height(200.dp) // ⬅️ Increased height from 150.dp to 200.dp
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.SpaceEvenly // evenly distributes content
         ) {
             Image(
                 painter = painterResource(id = icon),
                 contentDescription = title,
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(50.dp) // slightly larger icon for balance
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(title, fontWeight = FontWeight.Bold)
-            Text(description, fontSize = 12.sp, color = Color.Gray)
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+            Text(
+                text = description,
+                fontSize = 12.sp,
+                color = Color.Gray,
+                lineHeight = 14.sp,
+                modifier = Modifier.padding(horizontal = 4.dp),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+            )
         }
     }
 }
+
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -142,8 +160,8 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationBarItem(
             icon = { Icon(painterResource(R.drawable.ic_image), contentDescription = "Home") },
             label = { Text("Home") },
-            selected = true,
-            onClick = { navController.navigate("home") }
+            selected = false,
+            onClick = { navController.navigate("image_translation") } // ✅ goes to ImageTranslation
         )
         NavigationBarItem(
             icon = { Icon(painterResource(R.drawable.ic_history), contentDescription = "History") },
@@ -159,3 +177,5 @@ fun BottomNavigationBar(navController: NavController) {
         )
     }
 }
+
+

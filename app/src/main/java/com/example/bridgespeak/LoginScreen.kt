@@ -30,9 +30,9 @@ fun LoginScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Logo (optional)
+            // Logo
             Image(
-                painter = painterResource(id = R.drawable.logo), // replace with your logo file
+                painter = painterResource(id = R.drawable.logo), // replace with your logo
                 contentDescription = "App Logo",
                 modifier = Modifier.size(150.dp)
             )
@@ -47,6 +47,7 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            // Email Field
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -57,6 +58,7 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            // Password Field
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -69,23 +71,21 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            // ✅ Login Button - Now always navigates to home
             Button(
                 onClick = {
-                    // TODO: Add real authentication logic here
-                    navController.navigate("camera")
+                    navController.navigate("home") {
+                        popUpTo("login") { inclusive = true }
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Login")
             }
 
-            navController.navigate("home") {
-                popUpTo("login") { inclusive = true }
-            }
-
-
             Spacer(modifier = Modifier.height(16.dp))
 
+            // Go to Signup
             TextButton(onClick = {
                 navController.navigate("signup")
             }) {

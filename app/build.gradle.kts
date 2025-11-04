@@ -89,4 +89,8 @@ dependencies {
     // Optional: for debugging and preview
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Image Translation
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
 }
