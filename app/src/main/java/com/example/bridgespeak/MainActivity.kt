@@ -44,7 +44,8 @@ class MainActivity : ComponentActivity() {
                         composable("image_translation") { ImageTranslationScreen() }
                         composable("home") { HomeScreen(navController) }
                         composable("history") { /* HistoryScreen(navController) */ }
-                        composable("profile") { /* ProfileScreen(navController) */ }
+                        composable("profile") { ProfileScreen(navController) }
+
                     }
                 }
             }
