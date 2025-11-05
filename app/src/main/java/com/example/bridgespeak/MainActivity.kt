@@ -17,21 +17,37 @@ class MainActivity : ComponentActivity() {
             BridgeSpeakTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
+
+                    // ✅ Main navigation structure
                     NavHost(
                         navController = navController,
                         startDestination = "login"
                     ) {
-                        composable("login") { LoginScreen(navController) }
-                        composable("signup") { SignUpScreen(navController) }
-                        composable("home") { HomeScreen(navController) } // ✅ added this
-                        composable("image_translation") { ImageTranslationScreen() }
+                        // Login Screen
+                        composable("login") {
+                            LoginScreen(
+                                navController = navController
+                            )
+                        }
 
+                        // Sign Up Screen
+                        composable("signup") {
+                            SignUpScreen(navController)
+                        }
+
+                        // ✅ Main app after login (contains bottom nav)
+                        composable("main") {
+                            MainScreen(navController)
+                        }
+
+                        // Optional — standalone screens (if accessed directly)
+                        composable("image_translation") { ImageTranslationScreen() }
+                        composable("home") { HomeScreen(navController) }
+                        composable("history") { /* HistoryScreen(navController) */ }
+                        composable("profile") { /* ProfileScreen(navController) */ }
                     }
                 }
             }
         }
     }
 }
-
-
-

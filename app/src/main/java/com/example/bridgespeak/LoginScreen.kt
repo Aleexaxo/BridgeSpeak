@@ -1,95 +1,87 @@
 package com.example.bridgespeak
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
+    Scaffold(
+        containerColor = Color(0xFFE8EBF1)
+    ) { paddingValues ->
         Column(
             modifier = Modifier
+                .padding(paddingValues)
                 .fillMaxSize()
+                .background(Color(0xFFE8EBF1))
                 .padding(24.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            // Logo
+            // 🔹 App Logo
             Image(
-                painter = painterResource(id = R.drawable.logo), // replace with your logo
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "App Logo",
-                modifier = Modifier.size(150.dp)
+                modifier = Modifier
+                    .size(150.dp)
+                    .padding(bottom = 16.dp)
             )
-
-            Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Welcome!",
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center
+                text = "BridgeSpeak",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF003366)
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(40.dp))
 
-            // Email Field
+            // 🔹 Example Login Fields
             OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                singleLine = true,
+                value = "",
+                onValueChange = {},
+                label = { Text("Username") },
                 modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Password Field
             OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
+                value = "",
+                onValueChange = {},
                 label = { Text("Password") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
-            // ✅ Login Button - Now always navigates to home
+            // 🔹 Login Button
             Button(
                 onClick = {
-                    navController.navigate("home") {
+                    navController.navigate("main") {
                         popUpTo("login") { inclusive = true }
                     }
                 },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003366)),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Login")
+                Text("Login", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Go to Signup
-            TextButton(onClick = {
-                navController.navigate("signup")
-            }) {
-                Text("Don't have an account? Sign Up")
+            TextButton(onClick = { navController.navigate("signup") }) {
+                Text("Don't have an account? Sign up")
             }
         }
     }

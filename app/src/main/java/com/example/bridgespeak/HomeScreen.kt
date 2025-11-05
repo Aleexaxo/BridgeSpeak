@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -19,87 +20,81 @@ import com.example.bridgespeak.R
 
 @Composable
 fun HomeScreen(navController: NavController, userName: String = "Candesse") {
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(navController)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFE8EBF1))
+            .padding(16.dp)
+    ) {
+        // Top Section
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF003366))
+                .padding(16.dp)
+        ) {
+            Column {
+                Text(
+                    text = "Welcome, $userName!",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+                Text(
+                    text = "Breaking Barriers through communication",
+                    fontSize = 14.sp,
+                    color = Color.White
+                )
+            }
         }
-    ) { innerPadding ->
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // 2x2 Grid of Options
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xFFE8EBF1))
-                .padding(innerPadding)
+                .fillMaxWidth()
+                .weight(1f, fill = true),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Top Section
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFF003366))
-                    .padding(16.dp)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Column {
-                    Text(
-                        text = "Welcome, $userName!",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                    Text(
-                        text = "Breaking Barriers through communication",
-                        fontSize = 14.sp,
-                        color = Color.White
-                    )
-                }
+                HomeOptionCard(
+                    title = "Image Translation",
+                    description = "Upload or capture photos of hand signs.",
+                    icon = R.drawable.ic_image,
+                    onClick = { navController.navigate("image_translation") },
+                    modifier = Modifier.weight(1f)
+                )
+                HomeOptionCard(
+                    title = "Profile",
+                    description = "Edit your personal information.",
+                    icon = R.drawable.ic_profile,
+                    onClick = { navController.navigate("profile") },
+                    modifier = Modifier.weight(1f)
+                )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            // 2x2 Grid of Options
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    HomeOptionCard(
-                        title = "Image Translation",
-                        description = "Upload or capture photos of hand signs.",
-                        icon = R.drawable.ic_image,
-                        onClick = { navController.navigate("image_translation") },
-                        modifier = Modifier.weight(1f)
-                    )
-                    HomeOptionCard(
-                        title = "Profile",
-                        description = "Edit your personal information.",
-                        icon = R.drawable.ic_profile,
-                        onClick = { navController.navigate("profile") },
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    HomeOptionCard(
-                        title = "History",
-                        description = "View saved translations.",
-                        icon = R.drawable.ic_history,
-                        onClick = { navController.navigate("history") },
-                        modifier = Modifier.weight(1f)
-                    )
-                    HomeOptionCard(
-                        title = "Help and About",
-                        description = "Learn how to use BridgeSpeak.",
-                        icon = R.drawable.ic_help,
-                        onClick = { navController.navigate("help") },
-                        modifier = Modifier.weight(1f)
-                    )
-                }
+                HomeOptionCard(
+                    title = "History",
+                    description = "View saved translations.",
+                    icon = R.drawable.ic_history,
+                    onClick = { navController.navigate("history") },
+                    modifier = Modifier.weight(1f)
+                )
+                HomeOptionCard(
+                    title = "Help and About",
+                    description = "Learn how to use BridgeSpeak.",
+                    icon = R.drawable.ic_help,
+                    onClick = { navController.navigate("help") },
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }
@@ -115,7 +110,7 @@ fun HomeOptionCard(
 ) {
     Card(
         modifier = modifier
-            .height(200.dp) // ⬅️ Increased height from 150.dp to 200.dp
+            .height(200.dp)
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
@@ -126,12 +121,12 @@ fun HomeOptionCard(
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly // evenly distributes content
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Image(
                 painter = painterResource(id = icon),
                 contentDescription = title,
-                modifier = Modifier.size(50.dp) // slightly larger icon for balance
+                modifier = Modifier.size(50.dp)
             )
             Text(
                 text = title,
@@ -144,38 +139,8 @@ fun HomeOptionCard(
                 color = Color.Gray,
                 lineHeight = 14.sp,
                 modifier = Modifier.padding(horizontal = 4.dp),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                textAlign = TextAlign.Center
             )
         }
     }
 }
-
-
-@Composable
-fun BottomNavigationBar(navController: NavController) {
-    NavigationBar(
-        containerColor = Color.White,
-        tonalElevation = 8.dp
-    ) {
-        NavigationBarItem(
-            icon = { Icon(painterResource(R.drawable.ic_image), contentDescription = "Home") },
-            label = { Text("Home") },
-            selected = false,
-            onClick = { navController.navigate("image_translation") } // ✅ goes to ImageTranslation
-        )
-        NavigationBarItem(
-            icon = { Icon(painterResource(R.drawable.ic_history), contentDescription = "History") },
-            label = { Text("History") },
-            selected = false,
-            onClick = { navController.navigate("history") }
-        )
-        NavigationBarItem(
-            icon = { Icon(painterResource(R.drawable.ic_profile), contentDescription = "Profile") },
-            label = { Text("Profile") },
-            selected = false,
-            onClick = { navController.navigate("profile") }
-        )
-    }
-}
-
-
