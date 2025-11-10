@@ -43,8 +43,9 @@ class MainActivity : ComponentActivity() {
                         // Optional — standalone screens (if accessed directly)
                         composable("image_translation") { ImageTranslationScreen() }
                         composable("home") { HomeScreen(navController) }
-                        composable("history") { /* HistoryScreen(navController) */ }
+                        composable("history") { HistoryScreen(navController) }
                         composable("profile") { ProfileScreen(navController) }
+                        composable("about") { AboutScreen(navController) }
 
                     }
                 }

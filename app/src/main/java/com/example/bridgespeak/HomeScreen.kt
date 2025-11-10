@@ -95,7 +95,7 @@ fun HomeScreen(navController: NavController, userName: String = "Candesse") {
                         title = "Help and About",
                         description = "Learn how to use BridgeSpeak.",
                         icon = R.drawable.ic_help,
-                        onClick = { navController.navigate("help") },
+                        onClick = { navController.navigate("about") },
                         modifier = Modifier.weight(1f)
                     )
                 }

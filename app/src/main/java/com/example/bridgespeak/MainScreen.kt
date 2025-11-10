@@ -46,10 +46,13 @@ fun MainScreen(rootNavController: NavHostController) {
                 ImageTranslationScreen()
             }
             composable("history") {
-                // HistoryScreen(navController = navController)
+                HistoryScreen(navController = navController)
             }
             composable("profile") {
-                // ProfileScreen(navController = navController)
+                ProfileScreen(navController = navController)
+            }
+            composable("about") {
+                AboutScreen(navController = navController)
             }
         }
     }

@@ -18,14 +18,14 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
-        debug {
+        getByName("debug") {
             isMinifyEnabled = false
         }
     }
@@ -41,6 +41,7 @@ android {
 
     buildFeatures {
         compose = true
+        mlModelBinding = true
     }
 
     composeOptions {
@@ -51,6 +52,11 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    // ✅ Keep .tflite models uncompressed (important!)
+    androidResources {
+        noCompress += "tflite"
     }
 }
 
@@ -75,9 +81,16 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:1.3.3")
     implementation("androidx.camera:camera-view:1.3.3")
 
-    // TensorFlow Lite
+    // TensorFlow Lite (choose only ONE version set)
     implementation("org.tensorflow:tensorflow-lite:2.14.0")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.3")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
+
+    // Image loading
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // Material Icons
+    implementation("androidx.compose.material:material-icons-extended:1.5.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
@@ -86,11 +99,7 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 
-    // Optional: for debugging and preview
+    // Debug tools
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    //Image Translation
-    implementation("io.coil-kt:coil-compose:2.6.0")
-
 }

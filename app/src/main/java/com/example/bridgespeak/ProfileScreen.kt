@@ -126,7 +126,8 @@ fun ProfileScreen(navController: NavController) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_darkmode),
                                 contentDescription = null,
-                                tint = textColor
+                                tint = textColor,
+                                modifier = Modifier.size(24.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text("Dark Mode", color = textColor)
