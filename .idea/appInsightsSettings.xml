@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.bridgespeak" />
+                  <option name="mobileSdkAppId" value="1:60950876765:android:e8cc1dfe7383c5e4d573b4" />
+                  <option name="projectId" value="bridgespeak-e7f5a" />
+                  <option name="projectNumber" value="60950876765" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

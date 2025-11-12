@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60950876765",
+    "project_id": "bridgespeak-e7f5a",
+    "storage_bucket": "bridgespeak-e7f5a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60950876765:android:e8cc1dfe7383c5e4d573b4",
+        "android_client_info": {
+          "package_name": "com.example.bridgespeak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlbwSARo4xLTRPcboFQmvk3c_Cep3OZQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
